@@ -38,7 +38,7 @@
 - A combinator is a lambda with no free variables 
 - They just combine the arguments according to the expression
 - Divergence refers to the concept of beta expressions never stabilizing on a final form 
-- Example of convergence: (lx.xx)(lx.xx) 
+- Example of divergence: (lx.xx)(lx.xx) 
     + = (lx.xx)(lx.xx) 
     + And so on
 

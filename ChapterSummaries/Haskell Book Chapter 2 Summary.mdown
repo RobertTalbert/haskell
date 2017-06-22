@@ -1,0 +1,75 @@
+# Haskell Book Chapter 2 Summary
+
+## Intro to the tool stack
+
+- REPL = read/evaluate/print loop
+- Prelude = standard Haskell library set
+
+## Expressions and functions
+
+- Everything in Haskell is either an expression or a declaration
+    + Expression = Combination of values, functions, functions applied to values 
+    + Declaration = "Top level bindings that allow us to name expressions"
+- An expression is in _normal form_ if it cannot be reduced via evaluation to a smaller form. 
+- Redex = reducible expression
+- Function anatomy:
+    + Starts with the name of the function
+    + Then the parameters of the function
+    + Then gives the means of evaluating that function on an input
+    + Example: `function tripleX x = x * 3`
+    + Function names have to start with lowercase letters
+    + Variables too
+
+## Infix operators 
+
+- Infix operators are those that fit "within" the parameters, like "3 + 4" 
+- Prefix operators can be phrased as infix operators using backticks, for example `mod 10 4` can be `10 'mod' 4` 
+- `infixl` in the Prelude will give the order of operation for an operator 
+- Operations are left associative
+
+## Declaring values
+
+- This is done using the keyword `let`
+- Example: `let y = 9`
+- Side note: Modules are introduced; modules have to start with capital letters
+- Also side note: White space matters
+    + Use spaces not tabs
+    + Code that is part of an expression should be indented under that expression
+
+
+## Arithmetic functions
+
++ The usual `+, -, *, /` 
++ `div` = Divides and returns the quotient (integer) 
++ `mod` = Divides and returns the remainder (integer) 
++ `quot` = Divides and returns the quotient (integer) 
++ `rem` = Divides and returns the remainder (integer) 
++ Difference between `div` and `quot` is direction of rounding -- differences appear when working with negative numbers. Same for `mod` and `rem`. 
+    * Example: `mod (-10) 3 == 2` but `rem (-10) 3 == (-1)`. 
++ Laws for div, mod, quot, rem:
+    * `(quot x y)*y + (rem x y) == x`
+    * `(div x y)*y + (mod x y) == x`
+
+## Parenthesization
+
+- The `$` operator: `f $ a` means the same thing as f(a) or `f a`
+- Useful when parentheses are an issue: `(2^) $ 2^2` means `2^(2^2)`
+- Can use parentheses to partially apply infix operators. Example: `(1/) 4` is the "one over" function applied to 4
+
+
+## Let and where 
+
+- `let` introduces an expression, `where` is a declaration and is bound to its surroundings. 
+- Example: 
+
+```haskell
+printInc n = print plusTwo
+   where plusTwo = n + 2 
+```
+
+- Example: 
+
+```haskell
+printInc2 n = let plusTwo = n + 2
+              in print plusTwo 
+```

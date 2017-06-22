@@ -53,4 +53,4 @@ main = do
 - `tail` = returns everything but the head
 - `take n` = returns the first n items from a list (`take 2 "Hello" == "He"`)
 - `drop n` = remove the first n items from a list and return the leftovers (`drop 2 "Hello" == "llo"`)
-- `!!` = returns the element at a certain point in a list (`"Hello" !! 1 == 'e'`)
+- `!!` = returns the element at a certain point in a list (`"Hello" !! 1 == 'e'` ... note that's a `Char` not a string)

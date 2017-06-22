@@ -1,0 +1,45 @@
+# Haskell Book Chapter 1 Summary
+
+## Lambda calculus
+
+- Lambda calculus is a system for abstracting the concept of a function. 
+- _Abstraction_: A function, a lambda term that has a _head_ and a _body_ and is applied to an _argument_. 
+- The head is a lambda ($$\lambda$$, will use L for text purposes) followed by a variable name. The body is an expression in the variable. The variable is called the _parameter_. The parameter _binds_ all instances of the variable in the function. 
+- Example: Lx.x <-- The "x" to the right of the dot is the expression that is returned by the function. So this is the lambda version of the identity function. 
+- _Alpha equivalence_ refers to the idea that functions operate the same way regardless of the choice of letter. For example Lx.x and Lz.z are alpha equivalent. 
+
+## Beta reduction
+
+- _Beta reduction_ is the process of actually applying the function to an input and getting an output. 
+- Example: (Lx.x)2 = 2 
+- Example: (Lx.x)(Ly.y) = Ly.y (plugging a function into a function gives another function)
+- Example: (Lx.x)(Ly.y)(z) = ((Lx.x)(Ly.y))z = (Ly.y)z = z. This is an example of _left associativity_. 
+- _Free  variables_ are variables in a lambda expression that aren't bound by a parameter in the head of the lambda. Example: y is a free variable in lx.xy. 
+- Example of beta reduction with a free variable: (lx.xy)(z) = zy. 
+
+## Multiple arguments and currying
+
+- Example: lxy.xy -- looks like function f(x,y) = xy which is a function from R^2 into R. But we can think of it as two functions: 
+    + A function u: R --> R^R given by u(x) = the function R -> R that maps y to xy
+    + Application of the y -> xy function to the input y. 
+    + This is called currying -- decomposing multiple argument functions into chains of single argument functions. 
+- Back to the example: lxy.xy. Apply this to the multiple inputs 1,2. 
+    + (lxy.xy) 1 2 
+    + Currying: (lx(ly.xy)) 1 2 <-- I.e. (x,y) -> xy is taking the function y -> xy and mapping 1 into the x position to get the function y -> 1 * y, then evaluating this function at y = 2. 
+    + So, (lx(ly.xy)) 1 2 = (ly.1y) 2 = 1*2 = 2. 
+- Another example: (lxy.xy)(lz.a)(1)
+    + = (lx(ly.xy))(lz.a)(1)    [Currying]
+    + = (ly.(lz.a)y)(1)   [Evaluating lz.a into x]
+    + = (lz.a)(1)
+    + = a 
+
+## Combinators and divergence
+
+- A combinator is a lambda with no free variables 
+- They just combine the arguments according to the expression
+- Divergence refers to the concept of beta expressions never stabilizing on a final form 
+- Example of convergence: (lx.xx)(lx.xx) 
+    + = (lx.xx)(lx.xx) 
+    + And so on
+
+

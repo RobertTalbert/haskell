@@ -1,0 +1,56 @@
+# Haskell Book Chapter 3 Summary
+
+## Strings and types
+
+- Strings are considered lists, whose elements are characters
+- So 'C' is a character but 'Cool bro' is a string (list) 
+- Find out the type of something in GHCi by entering `:t`
+- `print` prints out a string
+- `putStrLn` puts the string on the line -- no quotes (and inserts a blank lie at the end)
+- Concatenation of strings is done with `++` or `concat`. `++` is an infix operator that takes two lists, whereas `concat` is prefix and takes in a list of lists. 
+
+## Top-level and local declarations
+
+- Top-level definitions are those that are not buried inside other expressions like local variables 
+
+## Concatenation and types 
+
+- Shorthand for how `++` works:
+```haskell
+(++) :: [a] -> [a] -> [a]
+```
+
+- This is currying -- instead of thinking of it as working on a pair of lists and producing a list, the first list is input and produces a new function from lists to lists, then we evaluate that function at the second input.
+- The `a` here can be any data type. This is __polymorphism__. 
+- But it's the same `a` in the polymorphish so we cannot concatenate two lists that have different types inside them. `[1,2,3] ++ [4,5,6]` is OK but `[1,2,3] ++ ['a', 'b']` throws a type error. 
+
+## Scoping
+
+- Variables can sometimes fail to be "in scope" meaning that the module or function doesn't know what they are. 
+- Example 
+
+```haskell
+module Print3Broken where
+
+printSecond :: IO ()
+printSecond = do 
+   putStrLn greeting 
+
+main :: IO ()
+main = do
+   putStrLn greeting
+   printSecond 
+   where greeting = "Yarrrr"
+```
+
+- The `greeting` variable is not in scope because it's in a local binding, so it's not available at the top level where `printSecond` is defined. It's only visible in the function to which it is attached. I fixed this in the exercises by moving the declaration to the top level. 
+
+
+## List functions
+
+- `cons` = `:` builds a list, more like adds a thing into a list
+- `head` = returns the "head" or first element of a list
+- `tail` = returns everything but the head
+- `take n` = returns the first n items from a list (`take 2 "Hello" == "He"`)
+- `drop n` = remove the first n items from a list and return the leftovers (`drop 2 "Hello" == "llo"`)
+- `!!` = returns the element at a certain point in a list (`"Hello" !! 1 == 'e'`)

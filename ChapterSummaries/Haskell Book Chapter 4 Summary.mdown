@@ -1,0 +1,69 @@
+# Haskell Book Chapter 4 Summary
+
+## Types
+
+- Types refer to a grouping of objects that have similar properties and operations available to them. 
+- Can sort of think of a "type" as a "category" in the math sense. 
+
+## Data declarations
+
+- A way of "Declaring" a type -- what it consists of 
+- Syntax: `data Bool = False | True` 
+    + This means that Bool is the type, and it can take on two values (False and True)
+    + The whole thing is called a _data declaration_
+- Example: `data Mood = Blah | Woot deriving Show`
+    + "deriving Show" means that a Mood can be printed to the screen -- without this, print etc. methods will not work
+
+## Numeric types
+
++ `Int`, `Integer` -- both integers, `Int` is fixed-precision and `Integer` is arbitrary precision
++ `Fractional`: Includes...
+    * `Float`
+    * `Double`
+    * `Rational`
+    * `Scientific`
++ All have an instance of type `Num` -- means that we can use `Num` functions on all of these without extra effort 
+
+## Comparing values 
+
++ Comparison operators: `==`, `<`, `>`, `/=` 
++ These work on all the numeric types because they all have an instance of types `Eq` and `Ord`
++ Also works on strings, same reason
+
+## Booleans 
+
++ `not` is the logical not operator
++ `&&` = conjunction, `||` = disjunction 
++ if-then-else syntax in Haskell: 
+
+```haskell
+if WHATEVER
+then SOMETHING
+else SOMETHING_ELSE 
+```
+
++ Bigger example: 
+
+```haskell
+module GreetIfCool1 where
+greetIfCool :: String -> IO () 
+greetIfCool coolness =
+   if cool
+      then putStrLn "eyyyyy. What's shakin'?"
+   else
+      putStrLn "pshhhh."
+where cool = coolness == "downright frosty yo"
+```
+
+## Tuples 
+
+- Constructor is `(,)` as prefix 
+- Can make tuples of different types 
+- `fst` and `snd` = first and second elements respectively of a tuple
+- `Data.Tuple` has more, like `swap`
+
+
+## Lists 
+
+- Lists cannot contain elements of different types -- VERY MUCH unlike Python 
+- In fact it's the opposite of Python because in Python tuples have to have the same type but lists can be whatever

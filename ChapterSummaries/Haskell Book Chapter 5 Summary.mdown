@@ -1,0 +1,50 @@
+# Haskell Book Chapter 5 Summary
+
+## What are types for
+
+- We use types in Haskell to ensure that the code we write is operating on the right things, no exceptions or glitches because of semantic issues 
+- Types also help us understand what sorts of operations are available and which ones aren't, and to keep variables in scope 
+- Optimizes compiler 
+
+
+## Type signatures 
+
+- Access at REPL by typing `:t whatever`
+- Examples: 
+    + `:t 13` gives `13 :: Num t => t` 13 is an integer of course but Haskell defaults to the most general type possible, to allow greatest flexibility
+    + If we wanted 13 really to be an integer:
+
+```haskell
+let x = 13 :: Integer 
+:t 13
+```
+This gives `13 :: Integer`. 
+
+- The `Num t => t` shows that the `t` (which is just 13 here) is bound to be a `Num` type. Otherwise no restrictions, so we say it's _constrained polymorphic_
+- Functions use a `->`. For example `length` has type `[a] -> Int`. It's _parametrically polymorphic_ because the contents of the list can be whatever. 
+- Other functions are constrained: 
+```haskell
+:t (/)
+(/) :: Fractional a => a -> a -> a
+```
+So the division operator **has** to work on `Fractional` types. As long as we are plugging those types in, it works by taking a Fractional, then another Fractional and produces a Fractional. (Currying again) 
+
+- There could be multiple typeclass constraints:
+
+## Currying and partial application
+
+- Already discussed currying earlier. 
+- Currying allows partial application of a function, for example `(/) 2` divides stuff by 2 as long as stuff is Fractional
+
+## Type inference 
+
+- Haskell has the ability to infer the types of variables being used in functions up to a point. 
+- Better to declare explicitly
+- But, if that's hard, just ignore it -- or let Haskell infer first and then declare explicitly using compiler results as a guide 
+
+## Asserting types in declarations
+
+- We can force types in the declaration of a function
+- Just bind the type to a variable using `::`
+- Example: `let triple x = x * 3 :: Integer`
+

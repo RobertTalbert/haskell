@@ -13,11 +13,3 @@ recProd' a b
    | b == 0    = 0 
    | otherwise = a + recProd a (b-1)
 
-
-
-
--- recProd a b 
---    | b == 0    = 0
---    | otherwise = a + recProd a b-1
-
-

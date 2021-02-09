@@ -14,3 +14,4 @@ length' xs = sum [1 | _ <- xs]
 
 triangles = [ (a,b,c) | a <- [1..10], b <- [1..10], c <- [1..10]]
 ans = [(a,b,c) | (a,b,c) <- triangles, a^2 + b^2 == c^2, a+b+c == 24]
+

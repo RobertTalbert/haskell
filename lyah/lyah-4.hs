@@ -32,7 +32,7 @@ binomial :: (Integral a) => a -> a -> a
 binomial n k 
     | k == 0      = n
     | n == k      = 1
-    | otherwise   = (binomial(n-1, k)) + (binomial(n-1, k-1))
+    | otherwise   = binomial (n-1) k + binomial (n-1) (k-1)
 
 max' :: (Ord a) => a -> a -> a
 max' a b 
